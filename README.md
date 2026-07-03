@@ -48,11 +48,7 @@
 ├── README.md
 └── docs
     ├── PRD.pdf
-    ├── PRD.wps
-    └── preview
-        ├── prd-page-1.png
-        ├── prd-page-2.png
-        └── prd-page-3.png
+    └── PRD.wps
 ```
 
 ## 文档入口
@@ -62,14 +58,6 @@
 - [PRD 文档 WPS 原文件](docs/PRD.wps)
 
 说明：GitHub 对 `.wps` 文件通常不能直接在线预览，建议优先查看 PDF 版；WPS 原文件可下载后用 WPS Office 打开。
-
-## PRD 页面预览
-
-![PRD 第 1 页](docs/preview/prd-page-1.png)
-
-![PRD 第 2 页](docs/preview/prd-page-2.png)
-
-![PRD 第 3 页](docs/preview/prd-page-3.png)
 
 ## 后续交付物
 
