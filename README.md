@@ -47,14 +47,16 @@
 .
 ├── README.md
 └── docs
+    ├── PRD.pdf
     └── PRD.wps
 ```
 
 ## 文档入口
 
-- [PRD 文档](docs/PRD.wps)
+- [PRD 文档 PDF 版](docs/PRD.pdf)
+- [PRD 文档 WPS 原文件](docs/PRD.wps)
 
-说明：GitHub 对 `.wps` 文件通常不能直接在线预览，点击后可下载查看。
+说明：GitHub 对 `.wps` 文件通常不能直接在线预览，建议优先查看 PDF 版；WPS 原文件可下载后用 WPS Office 打开。
 
 ## 后续交付物
 
@@ -68,4 +70,3 @@
 - 测试报告
 - 标准化 Bug 单
 - AI 自动化测试插件原型设计方案
-
