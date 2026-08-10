@@ -1,65 +1,101 @@
-# 自动化测试全流程插件原型 + React Flask 登录注册 Demo
+# AI Testing Agent Demo - Login/Register System
 
-## 项目简介
+This project is a small React + Flask demo used to verify an AI-assisted testing workflow. The demo includes a basic registration and login flow, testing documents, a test report, and a bug report.
 
-本项目用于验证 AI 驱动的一站式自动化测试插件最小闭环，覆盖从 PRD 分析、需求拆解、测试用例设计、用例执行、测试报告生成到 Bug 单提交的完整流程。
+The key purpose of this project is not only to build a login/register system, but also to show a complete testing process from requirement analysis to bug reporting.
 
-由于当前没有公司内部系统权限，项目先以一个简易的 React + Flask 登录注册 Demo 作为最小可验证对象，用于沉淀自动化测试插件的原型方案和测试流程材料。
+## Tech Stack
 
-## 项目目标
+- Frontend: React, Vite, Axios, React Router
+- Backend: Flask, SQLite
+- Testing: Browser testing, API testing, test cases, test report, bug report
 
-- 设计并开发前后端分离的登录注册 Demo 系统
-- 通过人工预埋业务规则类 Bug，模拟真实测试发现问题的过程
-- 输出 PRD、需求分析、测试用例、测试报告、Bug 单等完整交付物
-- 梳理 AI 自动化测试插件从 PRD 到 Bug 提交的执行链路
-- 为后续开发正式插件提供可复用的原型基础
+## Features
 
-## 技术栈
+- User registration
+- User login
+- Login success page
+- Basic backend validation
+- SQLite user storage
 
-- 前端：React、Axios、React Router、Ant Design
-- 后端：Flask、Python、SQLite
-- 测试：手工测试、接口测试、测试报告、Bug 管理规范
-- 插件方向：大模型 PRD 解析、Prompt 工程、测试用例自动生成
+## Intentional Bug
 
-## 核心功能规划
+The requirement states that username length must be at least 6 characters.
 
-- 用户注册
-- 用户登录
-- 表单校验
-- 登录状态跳转
-- 基础异常提示
+However, the backend registration API intentionally does not validate username length. This is used as a known bug for testing:
 
-## 预埋 Bug 说明
+```text
+BUG_REGISTER_001 - Username length validation is missing in the registration API
+```
 
-需求要求用户名长度不少于 6 位，但注册接口计划故意不做用户名长度校验。
-
-该问题用于模拟自动化测试插件发现 Bug 的流程：
-
-1. 从 PRD 中解析出用户名长度规则
-2. 自动生成边界值测试用例
-3. 执行用户名少于 6 位的注册场景
-4. 识别实际结果与需求不一致
-5. 自动生成测试报告和 Bug 单
-
-## 当前仓库内容
+## Project Structure
 
 ```text
 .
-├── README.md
-└── docs
-    ├── PRD.pdf
-    └── PRD.wps
+├── backend
+│   ├── app.py
+│   └── requirements.txt
+├── docs
+│   ├── PRD.pdf
+│   ├── PRD.wps
+│   ├── bug_report(human test).md
+│   ├── login_test_cases.md
+│   ├── login_test_execution.md
+│   ├── register_requirement.md
+│   ├── test_cases.md
+│   ├── test_execution.md
+│   └── test_report.md
+└── frontend
+    ├── package.json
+    ├── src
+    └── vite.config.js
 ```
 
-## 后续交付物
+## How to Run
 
-- React 前端工程
-- Flask 后端工程
-- SQLite 数据库初始化脚本
-- 需求规格说明书
-- 测试用例设计文档
-- 手工测试执行记录
-- 接口测试执行记录
-- 测试报告
-- 标准化 Bug 单
-- AI 自动化测试插件原型设计方案
+### Backend
+
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
+
+The backend runs at:
+
+```text
+http://127.0.0.1:5000
+```
+
+### Frontend
+
+Open another terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend runs at:
+
+```text
+http://localhost:5173
+```
+
+## Test Result
+
+Total test cases: 7
+
+- Passed: 6
+- Failed: 1
+
+The failed case is `TC_REGISTER_004`, where a username shorter than 6 characters can still be registered successfully.
+
+See the full report in:
+
+```text
+docs/test_report.md
+```
