@@ -1,20 +1,17 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Card, Form, Input, Typography } from "antd";
 import axios from "axios";
 
+const { Text } = Typography;
+
 function Register() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleRegister = async () => {
+    const handleRegister = async (values) => {
         try {
             const response = await axios.post(
                 "http://127.0.0.1:5000/api/register",
-                {
-                    username,
-                    password,
-                }
+                values
             );
 
             alert(response.data.message);
@@ -26,28 +23,39 @@ function Register() {
 
     return (
         <div className="auth-page">
-            <div className="auth-card">
+            <Card className="auth-card">
                 <h1>Register</h1>
 
-                <input
-                    placeholder="Username"
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                />
+                <Form layout="vertical" onFinish={handleRegister}>
+                    <Form.Item
+                        label="Username"
+                        name="username"
+                        rules={[{ required: true, message: "Please enter username" }]}
+                    >
+                        <Input placeholder="Username" />
+                    </Form.Item>
 
-                <input
-                    placeholder="Password"
-                    type="password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                />
+                    <Form.Item
+                        label="Password"
+                        name="password"
+                        rules={[
+                            { required: true, message: "Please enter password" },
+                            { min: 6, message: "Password must be at least 6 characters" },
+                        ]}
+                    >
+                        <Input.Password placeholder="Password" />
+                    </Form.Item>
 
-                <button onClick={handleRegister}>Register</button>
+                    <Button type="primary" htmlType="submit" block>
+                        Register
+                    </Button>
+                </Form>
 
-                <p>
-                    Already have an account? <a href="/login">Login</a>
+                <p className="auth-footer">
+                    <Text type="secondary">Already have an account? </Text>
+                    <Link to="/login">Login</Link>
                 </p>
-            </div>
+            </Card>
         </div>
     );
 }

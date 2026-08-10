@@ -1,23 +1,21 @@
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Card, Form, Input, Typography } from "antd";
 import axios from "axios";
 
+const { Text } = Typography;
 
 function Login() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const handleLogin = async () => {
+    const handleLogin = async (values) => {
         try {
             const response = await axios.post(
                 "http://127.0.0.1:5000/api/login",
-                {
-                    username,
-                    password,
-                }
+                values
             );
 
             if (response.data.message === "Login successful") {
-                window.location.href = "/success";
+                navigate("/success");
             }
         } catch (error) {
             alert(error.response?.data?.message || "Login failed");
@@ -26,28 +24,36 @@ function Login() {
 
     return (
         <div className="auth-page">
-            <div className="auth-card">
+            <Card className="auth-card">
                 <h1>Login</h1>
 
-                <input
-                    placeholder="Username"
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                />
+                <Form layout="vertical" onFinish={handleLogin}>
+                    <Form.Item
+                        label="Username"
+                        name="username"
+                        rules={[{ required: true, message: "Please enter username" }]}
+                    >
+                        <Input placeholder="Username" />
+                    </Form.Item>
 
-                <input
-                    placeholder="Password"
-                    type="password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                />
+                    <Form.Item
+                        label="Password"
+                        name="password"
+                        rules={[{ required: true, message: "Please enter password" }]}
+                    >
+                        <Input.Password placeholder="Password" />
+                    </Form.Item>
 
-                <button onClick={handleLogin}>Login</button>
+                    <Button type="primary" htmlType="submit" block>
+                        Login
+                    </Button>
+                </Form>
 
-                <p>
-                    No account yet? <a href="/register">Register</a>
+                <p className="auth-footer">
+                    <Text type="secondary">No account yet? </Text>
+                    <Link to="/register">Register</Link>
                 </p>
-            </div>
+            </Card>
         </div>
     );
 }
