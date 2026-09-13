@@ -1,0 +1,72 @@
+[
+  {
+    "test_case_id": "TC_REGISTER_001",
+    "related_requirement_id": "REQ_REGISTER_001",
+    "scenario": "Register with valid username and password",
+    "method": "POST",
+    "endpoint": "/api/register",
+    "test_data": {
+      "username": "user25665ec3",
+      "password": "123456"
+    },
+    "expected_status_code": 200,
+    "expected_message": "Registration_successful",
+    "priority": "High"
+  },
+  {
+    "test_case_id": "TC_REGISTER_002",
+    "related_requirement_id": "REQ_REGISTER_001",
+    "scenario": "Register with empty username",
+    "method": "POST",
+    "endpoint": "/api/register",
+    "test_data": {
+      "username": "",
+      "password": "123456"
+    },
+    "expected_status_code": 400,
+    "expected_message": "Username is required",
+    "priority": "High"
+  },
+  {
+    "test_case_id": "TC_REGISTER_003",
+    "related_requirement_id": "REQ_REGISTER_002",
+    "scenario": "Register with username length less than 6 characters",
+    "method": "POST",
+    "endpoint": "/api/register",
+    "test_data": {
+      "username": "u2566",
+      "password": "123456"
+    },
+    "expected_status_code": 400,
+    "expected_message": "Username length must be at least 6 characters",
+    "priority": "High"
+  },
+  {
+    "test_case_id": "TC_REGISTER_004",
+    "related_requirement_id": "REQ_REGISTER_003",
+    "scenario": "Register with empty password",
+    "method": "POST",
+    "endpoint": "/api/register",
+    "test_data": {
+      "username": "pass25665ec3",
+      "password": ""
+    },
+    "expected_status_code": 400,
+    "expected_message": "Password is required",
+    "priority": "High"
+  },
+  {
+    "test_case_id": "TC_REGISTER_005",
+    "related_requirement_id": "REQ_REGISTER_004",
+    "scenario": "Register with password length less than 6 characters",
+    "method": "POST",
+    "endpoint": "/api/register",
+    "test_data": {
+      "username": "pass25665ec3",
+      "password": "123"
+    },
+    "expected_status_code": 400,
+    "expected_message": "Password length must be at least 6 characters",
+    "priority": "High"
+  }
+]

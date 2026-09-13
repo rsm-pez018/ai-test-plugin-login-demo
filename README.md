@@ -1,6 +1,6 @@
 # AI Testing Agent Demo - Login/Register System
 
-This project is a small React + Flask demo used to verify an AI-assisted testing workflow. The demo includes a basic registration and login flow, testing documents, a test report, and a bug report.
+This project is a small React + Flask demo used to verify an AI-assisted testing workflow. The demo includes a basic registration and login flow, testing documents, an AI testing agent prototype, a test report, and a bug report.
 
 The key purpose of this project is not only to build a login/register system, but also to show a complete testing process from requirement analysis to bug reporting.
 
@@ -9,6 +9,7 @@ The key purpose of this project is not only to build a login/register system, bu
 - Frontend: React, Vite, Axios, React Router
 - Backend: Flask, SQLite
 - Testing: Browser testing, API testing, test cases, test report, bug report
+- AI Agent Prototype: Python, API testing, structured JSON/Markdown outputs
 
 ## Features
 
@@ -45,6 +46,16 @@ BUG_REGISTER_001 - Username length validation is missing in the registration API
 │   ├── test_cases.md
 │   ├── test_execution.md
 │   └── test_report.md
+├── ai-agent
+│   ├── run_agent.py
+│   ├── requirements.txt
+│   └── outputs
+│       ├── requirements_ai.json
+│       ├── test_cases_ai.json
+│       ├── test_execution_ai.json
+│       ├── result_analysis_ai.json
+│       ├── bug_report_ai.md
+│       └── test_report_ai.md
 └── frontend
     ├── package.json
     ├── src
@@ -85,6 +96,37 @@ The frontend runs at:
 http://localhost:5173
 ```
 
+### AI Testing Agent
+
+Keep the Flask backend running first, then open another terminal:
+
+```bash
+cd ai-agent
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python run_agent.py
+```
+
+The agent runs this workflow:
+
+```text
+Requirement Analyzer
+→ Test Case Generator
+→ Test Executor
+→ Result Analyzer
+→ Bug Report Generator
+→ Test Report Generator
+```
+
+Generated outputs are saved in:
+
+```text
+ai-agent/outputs/
+```
+
+The agent calls the Flask API directly, so the frontend page does not need to be opened while running the agent.
+
 ## Test Result
 
 Total test cases: 7
@@ -98,4 +140,11 @@ See the full report in:
 
 ```text
 docs/test_report.md
+```
+
+AI-generated test outputs are available in:
+
+```text
+ai-agent/outputs/test_report_ai.md
+ai-agent/outputs/bug_report_ai.md
 ```

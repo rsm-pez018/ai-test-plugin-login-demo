@@ -1,0 +1,16 @@
+{
+  "total": 5,
+  "passed": 4,
+  "failed": 1,
+  "failed_cases": [
+    {
+      "test_case_id": "TC_REGISTER_003",
+      "scenario": "Register with username length less than 6 characters",
+      "expected_status_code": 400,
+      "expected_message": "Username length must be at least 6 characters",
+      "actual_status_code": 200,
+      "actual_message": "Registration_successful",
+      "failure_reason": "Actual result does not match expected result"
+    }
+  ]
+}
