@@ -4,7 +4,7 @@
     "scenario": "Register with valid username and password",
     "endpoint": "/api/register",
     "test_data": {
-      "username": "user25665ec3",
+      "username": "user42dfbe02",
       "password": "123456"
     },
     "expected_status_code": 200,
@@ -32,7 +32,7 @@
     "scenario": "Register with username length less than 6 characters",
     "endpoint": "/api/register",
     "test_data": {
-      "username": "u2566",
+      "username": "u42df",
       "password": "123456"
     },
     "expected_status_code": 400,
@@ -46,7 +46,7 @@
     "scenario": "Register with empty password",
     "endpoint": "/api/register",
     "test_data": {
-      "username": "pass25665ec3",
+      "username": "pass42dfbe02",
       "password": ""
     },
     "expected_status_code": 400,
@@ -60,7 +60,7 @@
     "scenario": "Register with password length less than 6 characters",
     "endpoint": "/api/register",
     "test_data": {
-      "username": "pass25665ec3",
+      "username": "pass42dfbe02",
       "password": "123"
     },
     "expected_status_code": 400,

@@ -6,7 +6,7 @@
     "method": "POST",
     "endpoint": "/api/register",
     "test_data": {
-      "username": "user25665ec3",
+      "username": "user42dfbe02",
       "password": "123456"
     },
     "expected_status_code": 200,
@@ -34,7 +34,7 @@
     "method": "POST",
     "endpoint": "/api/register",
     "test_data": {
-      "username": "u2566",
+      "username": "u42df",
       "password": "123456"
     },
     "expected_status_code": 400,
@@ -48,7 +48,7 @@
     "method": "POST",
     "endpoint": "/api/register",
     "test_data": {
-      "username": "pass25665ec3",
+      "username": "pass42dfbe02",
       "password": ""
     },
     "expected_status_code": 400,
@@ -62,7 +62,7 @@
     "method": "POST",
     "endpoint": "/api/register",
     "test_data": {
-      "username": "pass25665ec3",
+      "username": "pass42dfbe02",
       "password": "123"
     },
     "expected_status_code": 400,

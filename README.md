@@ -49,6 +49,13 @@ BUG_REGISTER_001 - Username length validation is missing in the registration API
 ├── ai-agent
 │   ├── run_agent.py
 │   ├── requirements.txt
+│   ├── skills
+│   │   ├── requirement_analyzer.py
+│   │   ├── test_case_generator.py
+│   │   ├── test_executor.py
+│   │   ├── result_analyzer.py
+│   │   ├── bug_report_generator.py
+│   │   └── test_report_generator.py
 │   └── outputs
 │       ├── requirements_ai.json
 │       ├── test_cases_ai.json
@@ -119,6 +126,8 @@ Requirement Analyzer
 → Test Report Generator
 ```
 
+`run_agent.py` acts as the workflow controller. Each file under `ai-agent/skills/` is an independent skill module for one step of the testing workflow.
+
 Generated outputs are saved in:
 
 ```text
@@ -128,6 +137,8 @@ ai-agent/outputs/
 The agent calls the Flask API directly, so the frontend page does not need to be opened while running the agent.
 
 ## Test Result
+
+Manual testing result:
 
 Total test cases: 7
 
@@ -147,4 +158,12 @@ AI-generated test outputs are available in:
 ```text
 ai-agent/outputs/test_report_ai.md
 ai-agent/outputs/bug_report_ai.md
+```
+
+Latest AI agent run:
+
+```text
+Total test cases: 5
+Passed: 4
+Failed: 1
 ```
