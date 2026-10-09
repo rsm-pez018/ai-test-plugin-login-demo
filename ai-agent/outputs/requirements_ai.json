@@ -1,30 +1,58 @@
 [
   {
-    "requirement_id": "REQ_REGISTER_001",
-    "module": "Register",
+    "requirement_id": "REQ-REGISTER-001",
+    "module": "Registration",
     "field": "username",
-    "rule": "Username is required",
-    "expected_behavior": "Registration should fail when username is empty"
+    "rule": "Username must be provided and not be empty",
+    "expected_behavior": "Registration fails with HTTP status 400 and message 'Username is required'"
   },
   {
-    "requirement_id": "REQ_REGISTER_002",
-    "module": "Register",
+    "requirement_id": "REQ-REGISTER-002",
+    "module": "Registration",
     "field": "username",
-    "rule": "Username length must be greater than or equal to 6 characters",
-    "expected_behavior": "Registration should fail when username length is less than 6 characters"
+    "rule": "Username must be at least 6 characters long",
+    "expected_behavior": "Registration fails with HTTP status 400 and message 'Username length must be at least 6 characters'"
   },
   {
-    "requirement_id": "REQ_REGISTER_003",
-    "module": "Register",
+    "requirement_id": "REQ-REGISTER-003",
+    "module": "Registration",
     "field": "password",
-    "rule": "Password is required",
-    "expected_behavior": "Registration should fail when password is empty"
+    "rule": "Password must be provided and not be empty",
+    "expected_behavior": "Registration fails with HTTP status 400 and message 'Password is required'"
   },
   {
-    "requirement_id": "REQ_REGISTER_004",
-    "module": "Register",
+    "requirement_id": "REQ-REGISTER-004",
+    "module": "Registration",
     "field": "password",
-    "rule": "Password length must be greater than or equal to 6 characters",
-    "expected_behavior": "Registration should fail when password length is less than 6 characters"
+    "rule": "Password must be at least 6 characters long",
+    "expected_behavior": "Registration fails with HTTP status 400 and message 'Password length must be at least 6 characters'"
+  },
+  {
+    "requirement_id": "REQ-LOGIN-001",
+    "module": "Login",
+    "field": "username",
+    "rule": "Username must be provided and not be empty",
+    "expected_behavior": "Login fails with HTTP status 400 and message 'Username is required'"
+  },
+  {
+    "requirement_id": "REQ-LOGIN-002",
+    "module": "Login",
+    "field": "password",
+    "rule": "Password must be provided and not be empty",
+    "expected_behavior": "Login fails with HTTP status 400 and message 'Password is required'"
+  },
+  {
+    "requirement_id": "REQ-LOGIN-003",
+    "module": "Login",
+    "field": "username",
+    "rule": "Username must exist in the system",
+    "expected_behavior": "Login fails with HTTP status 400 and message 'Invalid username or password'"
+  },
+  {
+    "requirement_id": "REQ-LOGIN-004",
+    "module": "Login",
+    "field": "password",
+    "rule": "Password must be correct for given username",
+    "expected_behavior": "Login fails with HTTP status 400 and message 'Invalid username or password'"
   }
 ]

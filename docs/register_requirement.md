@@ -11,4 +11,4 @@ Username length must be greater than or equal to 6 characters.
 
 Users must provide a password.
 
-Password length must be greater than or equal to 6 characters.b b
+Password length must be greater than or equal to 6 characters.

@@ -1,0 +1,22 @@
+{
+  "total": 10,
+  "passed": 9,
+  "failed": 1,
+  "failed_cases": [
+    {
+      "test_case_id": "TC-REGISTER-002",
+      "scenario": "Registration fails when username is shorter than 6 characters",
+      "method": "POST",
+      "endpoint": "/api/register",
+      "test_data": {
+        "username": "u0f2e",
+        "password": "Valid0f2e82c29"
+      },
+      "expected_status_code": 400,
+      "expected_message": "Username length must be at least 6 characters",
+      "actual_status_code": 200,
+      "actual_message": "Registration_successful",
+      "failure_reason": "Actual result does not match expected result"
+    }
+  ]
+}

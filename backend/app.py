@@ -169,3 +169,12 @@ if __name__ == "__main__":
     init_db()
 
     app.run(debug=True)
+
+
+# 启动 Flask
+
+if __name__ == "__main__":
+
+    init_db()
+
+    app.run(debug=True)

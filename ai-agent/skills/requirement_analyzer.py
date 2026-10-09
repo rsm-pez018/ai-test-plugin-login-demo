@@ -1,50 +1,26 @@
 import json
+from pathlib import Path
+from openai import OpenAI
+from dotenv import load_dotenv
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
+
+client = OpenAI()
 
 
-def read_requirement_file(requirement_file):
-    with open(requirement_file, "r", encoding="utf-8") as file:
+def read_file(file_path):
+    with open(file_path, "r", encoding="utf-8") as file:
         return file.read()
 
 
-def analyze_requirements(requirement_text):
-    text = requirement_text.lower()
-    requirements = []
+def analyze_with_llm(requirement_text, prompt_text):
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=f"{prompt_text}\n\nPRD Document:\n{requirement_text}"
+    )
 
-    if "username" in text:
-        requirements.append({
-            "requirement_id": "REQ_REGISTER_001",
-            "module": "Register",
-            "field": "username",
-            "rule": "Username is required",
-            "expected_behavior": "Registration should fail when username is empty"
-        })
-
-        requirements.append({
-            "requirement_id": "REQ_REGISTER_002",
-            "module": "Register",
-            "field": "username",
-            "rule": "Username length must be greater than or equal to 6 characters",
-            "expected_behavior": "Registration should fail when username length is less than 6 characters"
-        })
-
-    if "password" in text:
-        requirements.append({
-            "requirement_id": "REQ_REGISTER_003",
-            "module": "Register",
-            "field": "password",
-            "rule": "Password is required",
-            "expected_behavior": "Registration should fail when password is empty"
-        })
-
-        requirements.append({
-            "requirement_id": "REQ_REGISTER_004",
-            "module": "Register",
-            "field": "password",
-            "rule": "Password length must be greater than or equal to 6 characters",
-            "expected_behavior": "Registration should fail when password length is less than 6 characters"
-        })
-
-    return requirements
+    return json.loads(response.output_text)
 
 
 def save_requirements(requirements, output_file):
@@ -52,9 +28,11 @@ def save_requirements(requirements, output_file):
         json.dump(requirements, file, indent=2)
 
 
-def run(requirement_file, output_file):
-    requirement_text = read_requirement_file(requirement_file)
-    requirements = analyze_requirements(requirement_text)
+def run(requirement_file, output_file, prompt_file):
+    requirement_text = read_file(requirement_file)
+    prompt_text = read_file(prompt_file)
+
+    requirements = analyze_with_llm(requirement_text, prompt_text)
     save_requirements(requirements, output_file)
 
     return requirements

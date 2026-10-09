@@ -6,11 +6,17 @@ __pycache__/
 backend/venv/
 backend/users.db
 ai-agent/venv/
+users.db
+ai-agent/outputs/*.tmp
 
 # Node
 frontend/node_modules/
 frontend/dist/
+platform-frontend/node_modules/
+platform-frontend/dist/
 
 # Environment files
 .env
 .env.*
+!.env.example
+!ai-agent/.env.example

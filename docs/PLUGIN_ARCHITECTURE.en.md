@@ -1,0 +1,216 @@
+# AI Automated Testing Plugin Prototype Architecture
+
+## 1. Document Purpose
+
+This document describes the architecture of the minimum viable prototype for an AI-driven automated testing plugin. It covers the system modules, data flow, responsibility boundaries, and future evolution.
+
+The current prototype uses a React + Flask login and registration system as the system under test. It validates the complete workflow from PRD analysis to automated Bug Report generation.
+
+## 2. Product Goal
+
+The plugin accepts a product requirements document and an API contract, then performs the following workflow:
+
+```text
+Upload PRD
+→ Structure requirements
+→ Generate test cases
+→ Validate test cases
+→ Execute API tests
+→ Compare expected and actual results
+→ Generate Bug Report
+→ Generate Test Report
+```
+
+The plugin assists test engineers with requirements analysis, test design, and execution. It does not replace the test engineer's final judgment.
+
+## 3. Current MVP Scope
+
+### Supported
+
+- Markdown and TXT PRD upload
+- LLM-based requirement extraction
+- LLM-assisted API test-case generation
+- Test-case and API-contract validation
+- HTTP API execution
+- Deterministic status-code and message comparison
+- Failed-case analysis
+- Bug Report and Test Report generation
+- React + Ant Design testing workspace
+
+### Current Limitations
+
+- The prototype focuses on API testing and does not yet support browser automation.
+- PRD and output files currently use single-project global paths.
+- API contracts are manually configured; OpenAPI import is not implemented yet.
+- The demo uses SQLite and plaintext passwords for local prototyping only.
+- Bug Reports are not yet submitted to Jira or GitHub Issues.
+
+## 4. System Architecture
+
+```text
+┌──────────────────────────────┐
+│       Platform Frontend       │
+│  PRD upload, configuration,   │
+│  execution, and report views  │
+│          React + Ant Design   │
+└──────────────┬───────────────┘
+               │ HTTP
+               ▼
+┌──────────────────────────────┐
+│          Agent API            │
+│           Flask :5001         │
+│   Orchestrates the workflow   │
+└──────────────┬───────────────┘
+               ▼
+┌──────────────────────────────┐
+│       Agent Orchestrator      │
+│          run_agent.py         │
+└──────┬───────┬───────┬───────┘
+       │       │       │
+       ▼       ▼       ▼
+   LLM modules  Validators  Executor
+       │       │       │
+       └───────┴───────┘
+               ▼
+┌──────────────────────────────┐
+│       Demo System Under Test  │
+│          Flask :5000          │
+└──────────────────────────────┘
+```
+
+## 5. Core Module Responsibilities
+
+| Module | Type | Responsibility | Main Output |
+|---|---|---|---|
+| Requirement Analyzer | LLM | Extract business rules and expected behavior from the PRD | `requirements.json` |
+| Test Case Generator | LLM + code | Generate requirements-based test cases and runtime data | `test_cases.json` |
+| Test Case Validator | Deterministic code | Validate fields, APIs, request parameters, and positive-case coverage | Validated test cases |
+| Test Executor | Deterministic code | Call the target API and record responses | `test_execution.json` |
+| Result Analyzer | Deterministic code | Compare expected and actual results and calculate PASS/FAIL | `result_analysis.json` |
+| Bug Report Generator | Deterministic template | Generate Bug Reports from failed execution records | `bug_report.md` |
+| Test Report Generator | Deterministic template | Generate statistics and test reports from execution records | `test_report.md` |
+
+## 6. LLM and Deterministic Boundaries
+
+### LLM Responsibilities
+
+- Understand natural-language PRDs
+- Extract business rules
+- Design test scenarios
+- Generate structured test-case drafts
+- Organize explanatory text
+
+### Deterministic Code Responsibilities
+
+- Validate LLM output schemas
+- Validate endpoints and request fields
+- Generate unique test data
+- Call the real API
+- Compare expected and actual results
+- Calculate pass and failure counts
+- Generate factual report fields
+
+PASS/FAIL decisions must remain deterministic. Test data, expected results, actual results, and statistics in reports must come from real execution records to prevent the reporting model from changing or inventing facts.
+
+## 7. Data Flow and Artifacts
+
+### Inputs
+
+1. PRD: describes business rules and expected behavior.
+2. API contract: describes the base URL, endpoints, request fields, and expected responses.
+3. Environment configuration: describes the target environment and required authentication.
+
+### Intermediate Data
+
+```text
+requirements.json
+→ test_cases.json
+→ test_execution.json
+→ result_analysis.json
+```
+
+### Final Artifacts
+
+```text
+bug_report.md
+test_report.md
+```
+
+Each run should retain its input, test cases, execution results, and reports for review and troubleshooting.
+
+## 8. Test Data and Dependencies
+
+Test data can be generated by code at the beginning of each run; the database does not need to contain real data in advance. Examples include:
+
+```text
+valid_username
+valid_password
+short_username
+non_existing_username
+wrong_password
+```
+
+Cases that depend on other data must define setup and execution order. For example, a login test must first create a user successfully and then use the same account to log in. Future versions should model fixtures, setup, and teardown explicitly instead of relying only on test-case ordering.
+
+## 9. Generic API Test-Case Model
+
+The current demo uses usernames and passwords. A reusable version should abstract operations, requests, and assertions:
+
+```json
+{
+  "test_case_id": "TC-001",
+  "operation_id": "create_order",
+  "scenario": "Create order with empty items",
+  "preconditions": [],
+  "request": {
+    "method": "POST",
+    "path": "/orders",
+    "body": {}
+  },
+  "expected": {
+    "status_code": 400,
+    "message": "Items are required"
+  }
+}
+```
+
+This allows the plugin to support order, payment, product, content, and permission APIs without depending on login or registration fields.
+
+## 10. Future Roadmap
+
+### Phase 1: Complete the API Testing Platform
+
+- Introduce `project_id` and `run_id`.
+- Store data separately by project and run.
+- Support OpenAPI/Swagger import.
+- Support authentication, environment variables, and multiple environments.
+- Add setup, teardown, and test dependencies.
+- Add JSON and Markdown downloads.
+
+### Phase 2: Improve Reliability
+
+- Enforce strict structured LLM outputs.
+- Add timeouts, retries, and failure recovery.
+- Add human review and approval steps.
+- Build an evaluation set with multiple PRDs and known bugs.
+- Measure coverage, bug recall, false-positive rate, latency, and cost.
+
+### Phase 3: Extend Execution Capabilities
+
+- Add a Playwright browser executor.
+- Integrate with Jira and GitHub Issues.
+- Add authentication, persistence, and deployment capabilities.
+
+## 11. Current Demo Verification
+
+The latest complete run contains 10 test cases:
+
+```text
+Total: 10
+Passed: 9
+Failed: 1
+```
+
+The only failed case verifies the intentionally seeded business bug: the registration API accepts a username shorter than six characters.
+
+This result demonstrates the minimum closed loop from PRD analysis, test-case generation, and API execution to Bug Report and Test Report generation.

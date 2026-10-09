@@ -20,6 +20,9 @@ def analyze_test_results(execution_results):
             failed_cases.append({
                 "test_case_id": result["test_case_id"],
                 "scenario": result["scenario"],
+                "method": result["method"],
+                "endpoint": result["endpoint"],
+                "test_data": result["test_data"],
                 "expected_status_code": result["expected_status_code"],
                 "expected_message": result["expected_message"],
                 "actual_status_code": result["actual_status_code"],

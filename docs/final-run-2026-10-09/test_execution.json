@@ -1,0 +1,152 @@
+[
+  {
+    "test_case_id": "TC-REGISTER-001",
+    "scenario": "Registration fails when username is empty",
+    "method": "POST",
+    "endpoint": "/api/register",
+    "test_data": {
+      "username": "",
+      "password": "Valid0f2e82c29"
+    },
+    "expected_status_code": 400,
+    "expected_message": "Username is required",
+    "actual_status_code": 400,
+    "actual_message": "Username is required",
+    "status": "PASS"
+  },
+  {
+    "test_case_id": "TC-REGISTER-002",
+    "scenario": "Registration fails when username is shorter than 6 characters",
+    "method": "POST",
+    "endpoint": "/api/register",
+    "test_data": {
+      "username": "u0f2e",
+      "password": "Valid0f2e82c29"
+    },
+    "expected_status_code": 400,
+    "expected_message": "Username length must be at least 6 characters",
+    "actual_status_code": 200,
+    "actual_message": "Registration_successful",
+    "status": "FAIL"
+  },
+  {
+    "test_case_id": "TC-REGISTER-003",
+    "scenario": "Registration fails when password is empty",
+    "method": "POST",
+    "endpoint": "/api/register",
+    "test_data": {
+      "username": "pass0f2e82c2",
+      "password": ""
+    },
+    "expected_status_code": 400,
+    "expected_message": "Password is required",
+    "actual_status_code": 400,
+    "actual_message": "Password is required",
+    "status": "PASS"
+  },
+  {
+    "test_case_id": "TC-REGISTER-004",
+    "scenario": "Registration fails when password is shorter than 6 characters",
+    "method": "POST",
+    "endpoint": "/api/register",
+    "test_data": {
+      "username": "u0f2e",
+      "password": "12345"
+    },
+    "expected_status_code": 400,
+    "expected_message": "Password length must be at least 6 characters",
+    "actual_status_code": 400,
+    "actual_message": "Password length must be at least 6 characters",
+    "status": "PASS"
+  },
+  {
+    "test_case_id": "TC-REGISTER-005",
+    "scenario": "Registration success with valid username and password",
+    "method": "POST",
+    "endpoint": "/api/register",
+    "test_data": {
+      "username": "user0f2e82c2",
+      "password": "Valid0f2e82c29"
+    },
+    "expected_status_code": 200,
+    "expected_message": "Registration_successful",
+    "actual_status_code": 200,
+    "actual_message": "Registration_successful",
+    "status": "PASS"
+  },
+  {
+    "test_case_id": "TC-LOGIN-001",
+    "scenario": "Login fails when username is empty",
+    "method": "POST",
+    "endpoint": "/api/login",
+    "test_data": {
+      "username": "",
+      "password": "Valid0f2e82c29"
+    },
+    "expected_status_code": 400,
+    "expected_message": "Username is required",
+    "actual_status_code": 400,
+    "actual_message": "Username is required",
+    "status": "PASS"
+  },
+  {
+    "test_case_id": "TC-LOGIN-002",
+    "scenario": "Login fails when password is empty",
+    "method": "POST",
+    "endpoint": "/api/login",
+    "test_data": {
+      "username": "user0f2e82c2",
+      "password": ""
+    },
+    "expected_status_code": 400,
+    "expected_message": "Password is required",
+    "actual_status_code": 400,
+    "actual_message": "Password is required",
+    "status": "PASS"
+  },
+  {
+    "test_case_id": "TC-LOGIN-003",
+    "scenario": "Login fails when username does not exist",
+    "method": "POST",
+    "endpoint": "/api/login",
+    "test_data": {
+      "username": "nonexistent0f2e82c2",
+      "password": "Valid0f2e82c29"
+    },
+    "expected_status_code": 400,
+    "expected_message": "Invalid username or password",
+    "actual_status_code": 400,
+    "actual_message": "Invalid username or password",
+    "status": "PASS"
+  },
+  {
+    "test_case_id": "TC-LOGIN-004",
+    "scenario": "Login fails when password is incorrect",
+    "method": "POST",
+    "endpoint": "/api/login",
+    "test_data": {
+      "username": "user0f2e82c2",
+      "password": "Wrong0f2e82c29"
+    },
+    "expected_status_code": 400,
+    "expected_message": "Invalid username or password",
+    "actual_status_code": 400,
+    "actual_message": "Invalid username or password",
+    "status": "PASS"
+  },
+  {
+    "test_case_id": "TC-LOGIN-005",
+    "scenario": "Login success with valid username and password",
+    "method": "POST",
+    "endpoint": "/api/login",
+    "test_data": {
+      "username": "user0f2e82c2",
+      "password": "Valid0f2e82c29"
+    },
+    "expected_status_code": 200,
+    "expected_message": "Login successful",
+    "actual_status_code": 200,
+    "actual_message": "Login successful",
+    "status": "PASS"
+  }
+]

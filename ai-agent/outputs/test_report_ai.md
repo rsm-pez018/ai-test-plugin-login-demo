@@ -1,68 +1,57 @@
 # Test Report
 
-## Project
-
+## Project Name
 AI Testing Agent Demo - Login/Register System
 
-## Test Environment
+## Test Scope
+API testing of the configured target endpoints using generated requirements-based test cases.
 
+## Test Environment
 - Frontend: React
 - Backend: Flask
 - Database: SQLite
-- Testing Type: API Testing
+- Testing type: API Testing
 
 ## Test Summary
+- Total test cases executed: 10
+- Passed test cases: 9
+- Failed test cases: 1
 
-- Total Test Cases: 5
-- Passed: 4
-- Failed: 1
+## Passed Test Cases
+| Test case ID | Scenario |
+| --- | --- |
+| TC-REGISTER-001 | Registration fails when username is empty |
+| TC-REGISTER-003 | Registration fails when password is empty |
+| TC-REGISTER-004 | Registration fails when password is shorter than 6 characters |
+| TC-REGISTER-005 | Registration success with valid username and password |
+| TC-LOGIN-001 | Login fails when username is empty |
+| TC-LOGIN-002 | Login fails when password is empty |
+| TC-LOGIN-003 | Login fails when username does not exist |
+| TC-LOGIN-004 | Login fails when password is incorrect |
+| TC-LOGIN-005 | Login success with valid username and password |
 
-## Test Results
+## Failed Test Cases
+| Test case ID | Scenario | Expected | Actual |
+| --- | --- | --- | --- |
+| TC-REGISTER-002 | Registration fails when username is shorter than 6 characters | HTTP 400: Username length must be at least 6 characters | HTTP 200: Registration_successful |
 
-### TC_REGISTER_001
+## Failure Analysis
+### TC-REGISTER-002
+The scenario **Registration fails when username is shorter than 6 characters** failed because the actual response was HTTP 200 with message `Registration_successful`, while the expected response was HTTP 400 with message `Username length must be at least 6 characters`.
 
-- Scenario: Register with valid username and password
-- Expected: HTTP 200 / Registration_successful
-- Actual: HTTP 200 / Registration_successful
-- Status: PASS
+Test data:
+```json
+{
+  "username": "u0f2e",
+  "password": "Valid0f2e82c29"
+}
+```
 
-### TC_REGISTER_002
+## Bug Summary
 
-- Scenario: Register with empty username
-- Expected: HTTP 400 / Username is required
-- Actual: HTTP 400 / Username is required
-- Status: PASS
+| Bug ID | Test case ID | Severity | Priority |
+| --- | --- | --- | --- |
+| BUG-001 | TC-REGISTER-002 | Major | High |
 
-### TC_REGISTER_003
-
-- Scenario: Register with username length less than 6 characters
-- Expected: HTTP 400 / Username length must be at least 6 characters
-- Actual: HTTP 200 / Registration_successful
-- Status: FAIL
-
-### TC_REGISTER_004
-
-- Scenario: Register with empty password
-- Expected: HTTP 400 / Password is required
-- Actual: HTTP 400 / Password is required
-- Status: PASS
-
-### TC_REGISTER_005
-
-- Scenario: Register with password length less than 6 characters
-- Expected: HTTP 400 / Password length must be at least 6 characters
-- Actual: HTTP 400 / Password length must be at least 6 characters
-- Status: PASS
-
-## Failed Test Analysis
-
-### TC_REGISTER_003
-
-- Scenario: Register with username length less than 6 characters
-- Failure Reason: Actual result does not match expected result
-- Expected: HTTP 400 / Username length must be at least 6 characters
-- Actual: HTTP 200 / Registration_successful
-
-## Bug Reference
-
-See `bug_report_ai.md` for details.
+## Conclusion
+The run completed with 9 of 10 test cases passing and 1 failing.

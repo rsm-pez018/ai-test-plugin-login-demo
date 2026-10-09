@@ -1,77 +1,67 @@
-# AI Testing Agent Demo - Login/Register System
+# AI Testing Agent Prototype
 
-This project is a small React + Flask demo used to verify an AI-assisted testing workflow. The demo includes a basic registration and login flow, testing documents, an AI testing agent prototype, a test report, and a bug report.
+AI-assisted end-to-end API testing prototype built around a React + Flask login/register demo. The project validates the workflow from PRD analysis to executable tests, deterministic result comparison, Bug Report generation, and Test Report generation.
 
-The key purpose of this project is not only to build a login/register system, but also to show a complete testing process from requirement analysis to bug reporting.
-
-## Tech Stack
-
-- Frontend: React, Vite, Axios, React Router
-- Backend: Flask, SQLite
-- Testing: Browser testing, API testing, test cases, test report, bug report
-- AI Agent Prototype: Python, API testing, structured JSON/Markdown outputs
-
-## Features
-
-- User registration
-- User login
-- Login success page
-- Basic backend validation
-- SQLite user storage
-
-## Intentional Bug
-
-The requirement states that username length must be at least 6 characters.
-
-However, the backend registration API intentionally does not validate username length. This is used as a known bug for testing:
+## What this project demonstrates
 
 ```text
-BUG_REGISTER_001 - Username length validation is missing in the registration API
+PRD upload
+→ requirement extraction
+→ API test-case generation
+→ test-case validation
+→ deterministic API execution
+→ Expected / Actual comparison
+→ Bug Report
+→ Test Report
 ```
 
-## Project Structure
+The demo intentionally contains one business-rule bug: the PRD requires usernames to contain at least six characters, but the registration API does not enforce that rule.
+
+## Current verification
+
+The latest complete run contains:
+
+```text
+10 test cases
+9 passed
+1 failed
+```
+
+The failed case is the expected username-length defect in the registration API.
+
+## Project structure
 
 ```text
 .
-├── backend
-│   ├── app.py
-│   └── requirements.txt
-├── docs
-│   ├── PRD.pdf
-│   ├── PRD.wps
-│   ├── bug_report(human test).md
-│   ├── login_test_cases.md
-│   ├── login_test_execution.md
-│   ├── register_requirement.md
-│   ├── test_cases.md
-│   ├── test_execution.md
-│   └── test_report.md
-├── ai-agent
+├── backend/                  # Demo Flask API, port 5000
+├── frontend/                 # Login/register Demo UI
+├── platform-frontend/        # AI testing dashboard, port 5173
+├── ai-agent/                 # Agent API and testing pipeline, port 5001
+│   ├── agent_api.py
 │   ├── run_agent.py
-│   ├── requirements.txt
-│   ├── skills
-│   │   ├── requirement_analyzer.py
-│   │   ├── test_case_generator.py
-│   │   ├── test_executor.py
-│   │   ├── result_analyzer.py
-│   │   ├── bug_report_generator.py
-│   │   └── test_report_generator.py
-│   └── outputs
-│       ├── requirements_ai.json
-│       ├── test_cases_ai.json
-│       ├── test_execution_ai.json
-│       ├── result_analysis_ai.json
-│       ├── bug_report_ai.md
-│       └── test_report_ai.md
-└── frontend
-    ├── package.json
-    ├── src
-    └── vite.config.js
+│   ├── config/
+│   ├── prompts/
+│   ├── skills/
+│   └── outputs/
+├── docs/
+│   ├── PRD.md
+│   ├── PLUGIN_ARCHITECTURE.md
+│   ├── PLUGIN_ARCHITECTURE.en.md
+│   └── final-run-2026-10-09/
+└── HANDOFF.md
 ```
 
-## How to Run
+## Services and ports
 
-### Backend
+| Port | Service | Purpose |
+|---:|---|---|
+| 5000 | Demo Backend | Target login/register API |
+| 5001 | Agent API | Orchestrates the testing workflow |
+| 5173 | Platform Frontend | Human-facing testing dashboard |
+
+## Setup
+
+### 1. Demo backend
 
 ```bash
 cd backend
@@ -81,89 +71,59 @@ pip install -r requirements.txt
 python app.py
 ```
 
-The backend runs at:
+### 2. Agent API
 
-```text
-http://127.0.0.1:5000
-```
-
-### Frontend
-
-Open another terminal:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-The frontend runs at:
-
-```text
-http://localhost:5173
-```
-
-### AI Testing Agent
-
-Keep the Flask backend running first, then open another terminal:
+Copy `ai-agent/.env.example` to `ai-agent/.env`, then add an OpenAI API key locally. Never commit `.env`.
 
 ```bash
 cd ai-agent
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python run_agent.py
+python agent_api.py
 ```
 
-The agent runs this workflow:
+Health check:
 
-```text
-Requirement Analyzer
-→ Test Case Generator
-→ Test Executor
-→ Result Analyzer
-→ Bug Report Generator
-→ Test Report Generator
+```bash
+curl http://127.0.0.1:5001/api/health
 ```
 
-`run_agent.py` acts as the workflow controller. Each file under `ai-agent/skills/` is an independent skill module for one step of the testing workflow.
+### 3. Platform frontend
 
-Generated outputs are saved in:
-
-```text
-ai-agent/outputs/
+```bash
+cd platform-frontend
+npm install
+npm run dev
 ```
 
-The agent calls the Flask API directly, so the frontend page does not need to be opened while running the agent.
+Open [http://localhost:5173](http://localhost:5173).
 
-## Test Result
+## Demo workflow
 
-Manual testing result:
+1. Upload `docs/PRD.md` in the platform frontend.
+2. Configure the target API or load the Demo endpoints.
+3. Run the full workflow.
+4. Review Requirements, Test Cases, Execution, Analysis, Bug Report, and Test Report.
+5. Expand table rows to inspect Raw JSON where available.
 
-Total test cases: 7
+The Agent generates unique runtime usernames and passwords for each run. Login tests reuse the account created by the successful registration case. Reports use the actual execution records for test data, Expected, Actual, and statistics; LLMs are not used to decide PASS/FAIL.
 
-- Passed: 6
-- Failed: 1
+## Documentation and artifacts
 
-The failed case is `TC_REGISTER_004`, where a username shorter than 6 characters can still be registered successfully.
+- [Chinese plugin architecture](docs/PLUGIN_ARCHITECTURE.md)
+- [English plugin architecture](docs/PLUGIN_ARCHITECTURE.en.md)
+- [Active PRD](docs/PRD.md)
+- Final run artifacts: `docs/final-run-2026-10-09/`
+- Latest generated artifacts: `ai-agent/outputs/`
 
-See the full report in:
+## Security and prototype limitations
 
-```text
-docs/test_report.md
-```
+- Do not commit `.env`, API keys, virtual environments, `node_modules`, or SQLite databases.
+- The demo stores passwords in plaintext and must not be used as a production authentication service.
+- Flask development servers are for local testing only.
+- Uploaded PRDs may contain sensitive product information; a real deployment needs access control, retention, and deletion policies.
 
-AI-generated test outputs are available in:
+## Future direction
 
-```text
-ai-agent/outputs/test_report_ai.md
-ai-agent/outputs/bug_report_ai.md
-```
-
-Latest AI agent run:
-
-```text
-Total test cases: 5
-Passed: 4
-Failed: 1
-```
+The current project is an API-testing MVP. Future versions can add OpenAPI import, project/run isolation, authentication configuration, setup/teardown, additional API PRDs, Playwright browser execution, and Jira/GitHub integration.
