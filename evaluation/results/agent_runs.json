@@ -1,0 +1,196 @@
+{
+  "created_at": "2026-10-13T20:38:38.164699+00:00",
+  "runs": 3,
+  "known_bug_count": 5,
+  "total_trials": 15,
+  "detected_trials": 13,
+  "trial_recall": 0.8667,
+  "records": [
+    {
+      "bug_id": "B1",
+      "run_number": 1,
+      "project_id": "evaluation-b1-1",
+      "run_id": "run-20261013T203435Z-961870a8",
+      "duration_seconds": 19.3,
+      "detected": true,
+      "failed_cases": [
+        "TC_R3_01"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b1-1/runs/run-20261013T203435Z-961870a8"
+    },
+    {
+      "bug_id": "B1",
+      "run_number": 2,
+      "project_id": "evaluation-b1-2",
+      "run_id": "run-20261013T203455Z-2b0777f3",
+      "duration_seconds": 13.54,
+      "detected": true,
+      "failed_cases": [
+        "TC_R3_register_short_username"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b1-2/runs/run-20261013T203455Z-2b0777f3"
+    },
+    {
+      "bug_id": "B1",
+      "run_number": 3,
+      "project_id": "evaluation-b1-3",
+      "run_id": "run-20261013T203508Z-30e5dfb9",
+      "duration_seconds": 14.38,
+      "detected": true,
+      "failed_cases": [
+        "TC_R3_01"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b1-3/runs/run-20261013T203508Z-30e5dfb9"
+    },
+    {
+      "bug_id": "B2",
+      "run_number": 1,
+      "project_id": "evaluation-b2-1",
+      "run_id": "run-20261013T203523Z-601ce0dc",
+      "duration_seconds": 14.63,
+      "detected": true,
+      "failed_cases": [
+        "TC_R6_01"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b2-1/runs/run-20261013T203523Z-601ce0dc"
+    },
+    {
+      "bug_id": "B2",
+      "run_number": 2,
+      "project_id": "evaluation-b2-2",
+      "run_id": "run-20261013T203538Z-bf2c17e6",
+      "duration_seconds": 17.93,
+      "detected": true,
+      "failed_cases": [
+        "TC_R6_01"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b2-2/runs/run-20261013T203538Z-bf2c17e6"
+    },
+    {
+      "bug_id": "B2",
+      "run_number": 3,
+      "project_id": "evaluation-b2-3",
+      "run_id": "run-20261013T203556Z-64f3b413",
+      "duration_seconds": 17.11,
+      "detected": true,
+      "failed_cases": [
+        "TC_R4_01"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b2-3/runs/run-20261013T203556Z-64f3b413"
+    },
+    {
+      "bug_id": "B3",
+      "run_number": 1,
+      "project_id": "evaluation-b3-1",
+      "run_id": "run-20261013T203613Z-8117ad48",
+      "duration_seconds": 15.66,
+      "detected": true,
+      "failed_cases": [
+        "TC_R7_01"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b3-1/runs/run-20261013T203613Z-8117ad48"
+    },
+    {
+      "bug_id": "B3",
+      "run_number": 2,
+      "project_id": "evaluation-b3-2",
+      "run_id": "run-20261013T203629Z-00530b7d",
+      "duration_seconds": 14.65,
+      "detected": false,
+      "failed_cases": [
+        "TC_R7_Reg_DuplicateUsername"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b3-2/runs/run-20261013T203629Z-00530b7d"
+    },
+    {
+      "bug_id": "B3",
+      "run_number": 3,
+      "project_id": "evaluation-b3-3",
+      "run_id": "run-20261013T203644Z-4555889f",
+      "duration_seconds": 21.76,
+      "detected": true,
+      "failed_cases": [
+        "TC_R5_Register_DuplicateUsername"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b3-3/runs/run-20261013T203644Z-4555889f"
+    },
+    {
+      "bug_id": "B4",
+      "run_number": 1,
+      "project_id": "evaluation-b4-1",
+      "run_id": "run-20261013T203706Z-04974d95",
+      "duration_seconds": 18.51,
+      "detected": true,
+      "failed_cases": [
+        "TC-REQ-008-01",
+        "TC-REQ-009-01"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b4-1/runs/run-20261013T203706Z-04974d95"
+    },
+    {
+      "bug_id": "B4",
+      "run_number": 2,
+      "project_id": "evaluation-b4-2",
+      "run_id": "run-20261013T203725Z-76dba0ad",
+      "duration_seconds": 13.38,
+      "detected": true,
+      "failed_cases": [
+        "TC-REQ-6-01",
+        "TC-REQ-7-01"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b4-2/runs/run-20261013T203725Z-76dba0ad"
+    },
+    {
+      "bug_id": "B4",
+      "run_number": 3,
+      "project_id": "evaluation-b4-3",
+      "run_id": "run-20261013T203738Z-915cd231",
+      "duration_seconds": 12.21,
+      "detected": true,
+      "failed_cases": [
+        "TC-REQ-6-1",
+        "TC-REQ-7-1"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b4-3/runs/run-20261013T203738Z-915cd231"
+    },
+    {
+      "bug_id": "B5",
+      "run_number": 1,
+      "project_id": "evaluation-b5-1",
+      "run_id": "run-20261013T203751Z-adf7037f",
+      "duration_seconds": 15.81,
+      "detected": false,
+      "failed_cases": [
+        "TC_R6_Login_NonexistentUsername",
+        "TC_R7_Login_IncorrectPassword"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b5-1/runs/run-20261013T203751Z-adf7037f"
+    },
+    {
+      "bug_id": "B5",
+      "run_number": 2,
+      "project_id": "evaluation-b5-2",
+      "run_id": "run-20261013T203807Z-4cb1188a",
+      "duration_seconds": 14.24,
+      "detected": true,
+      "failed_cases": [
+        "TC_R6_01",
+        "TC_R7_01"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b5-2/runs/run-20261013T203807Z-4cb1188a"
+    },
+    {
+      "bug_id": "B5",
+      "run_number": 3,
+      "project_id": "evaluation-b5-3",
+      "run_id": "run-20261013T203821Z-50bed3d3",
+      "duration_seconds": 16.28,
+      "detected": true,
+      "failed_cases": [
+        "TC_R6_01",
+        "TC_R7_01"
+      ],
+      "workspace": "/Users/peipe/Desktop/AI-Testing-Agent/ai-agent/workspaces/evaluation-b5-3/runs/run-20261013T203821Z-50bed3d3"
+    }
+  ]
+}

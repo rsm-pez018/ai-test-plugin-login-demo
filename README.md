@@ -73,3 +73,12 @@ The Agent API exposes:
 The API executor only accepts configured HTTP(S) targets and relative endpoint
 paths. Request evidence redacts passwords, tokens, authorization values, and
 other secret-like fields.
+
+## Defect-detection evaluation
+
+The reproducible evaluation under `evaluation/` contains five controlled
+defect variants, a manual-baseline template, and an Agent evaluation runner.
+The first measured Agent experiment ran each variant three times: 15 trials,
+13 detections, and 86.67% trial-level recall. All five defect types were
+detected at least once. This is Agent-only data; manual time and manual recall
+must be measured separately with the provided checklist.

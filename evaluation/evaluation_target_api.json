@@ -1,0 +1,39 @@
+{
+  "project_name": "AI-QA Evaluation",
+  "base_url": "http://127.0.0.1:5100",
+  "endpoints": [
+    {
+      "name": "Register",
+      "path": "/api/register",
+      "method": "POST",
+      "request_body": {
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "expected_responses": [
+        {"condition": "Valid username and password", "status_code": 200, "message": "Registration_successful"},
+        {"condition": "Empty username", "status_code": 400, "message": "Username is required"},
+        {"condition": "Username shorter than 6 characters", "status_code": 400, "message": "Username length must be at least 6 characters"},
+        {"condition": "Empty password", "status_code": 400, "message": "Password is required"},
+        {"condition": "Password shorter than 6 characters", "status_code": 400, "message": "Password length must be at least 6 characters"},
+        {"condition": "Duplicate username", "status_code": 400, "message": "Username already exists"}
+      ]
+    },
+    {
+      "name": "Login",
+      "path": "/api/login",
+      "method": "POST",
+      "request_body": {
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "expected_responses": [
+        {"condition": "Valid username and password", "status_code": 200, "message": "Login successful"},
+        {"condition": "Empty username", "status_code": 400, "message": "Username is required"},
+        {"condition": "Empty password", "status_code": 400, "message": "Password is required"},
+        {"condition": "Username does not exist", "status_code": 400, "message": "Invalid username or password"},
+        {"condition": "Incorrect password", "status_code": 400, "message": "Invalid username or password"}
+      ]
+    }
+  ]
+}

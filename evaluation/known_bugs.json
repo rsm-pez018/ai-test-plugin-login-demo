@@ -1,0 +1,52 @@
+[
+  {
+    "bug_id": "B1",
+    "mutation": "missing_username_min_length",
+    "area": "registration",
+    "scenario": "Username shorter than 6 characters",
+    "endpoint": "POST /api/register",
+    "expected": "HTTP 400 with Username length must be at least 6 characters",
+    "actual_when_mutated": "HTTP 200 with Registration_successful",
+    "scenario_keywords": ["shorter", "less than 6", "minimum"]
+  },
+  {
+    "bug_id": "B2",
+    "mutation": "missing_password_min_length",
+    "area": "registration",
+    "scenario": "Password shorter than 6 characters",
+    "endpoint": "POST /api/register",
+    "expected": "HTTP 400 with Password length must be at least 6 characters",
+    "actual_when_mutated": "HTTP 200 with Registration_successful",
+    "scenario_keywords": ["password", "shorter", "less than 6", "minimum"]
+  },
+  {
+    "bug_id": "B3",
+    "mutation": "duplicate_username_allowed",
+    "area": "registration",
+    "scenario": "Registering an existing username",
+    "endpoint": "POST /api/register",
+    "expected": "HTTP 400 with Username already exists",
+    "actual_when_mutated": "HTTP 200 with Registration_successful",
+    "scenario_keywords": ["existing", "duplicate", "already"]
+  },
+  {
+    "bug_id": "B4",
+    "mutation": "invalid_password_accepted",
+    "area": "login",
+    "scenario": "Logging in with an incorrect password",
+    "endpoint": "POST /api/login",
+    "expected": "HTTP 400 with Invalid username or password",
+    "actual_when_mutated": "HTTP 200 with Login successful",
+    "scenario_keywords": ["incorrect password", "wrong password"]
+  },
+  {
+    "bug_id": "B5",
+    "mutation": "nonexistent_user_accepted",
+    "area": "login",
+    "scenario": "Logging in with a nonexistent username",
+    "endpoint": "POST /api/login",
+    "expected": "HTTP 400 with Invalid username or password",
+    "actual_when_mutated": "HTTP 200 with Login successful",
+    "scenario_keywords": ["non-existing", "nonexistent", "does not exist"]
+  }
+]
